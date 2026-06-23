@@ -1,5 +1,5 @@
 import { DataTypes, Model, Optional } from 'sequelize';
-import { sequelize } from './connection';
+import { sequelize } from '../database/connection';
 
 interface OrganizationAttributes {
   id: string;
