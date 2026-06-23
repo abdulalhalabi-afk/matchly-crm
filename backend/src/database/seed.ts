@@ -16,77 +16,160 @@ export const seedDatabase = async (): Promise<void> => {
 
     // Create organizations
     const org1 = await Organization.create({
-      name: 'Acme Corp',
-      email: 'contact@acme.com',
-      phone: '+49 30 123456',
-      website: 'www.acme.com',
-      address: 'Main Street 1',
-      city: 'Berlin',
+      name: 'Brussels Plumbing Services',
+      email: 'info@brusselsplumbing.be',
+      phone: '+32 2 555 12 34',
+      website: 'www.brusselsplumbing.be',
+      address: 'Rue de la Montagne 45',
+      city: 'Brussels',
     });
 
     const org2 = await Organization.create({
-      name: 'TechStart GmbH',
-      email: 'info@techstart.de',
-      phone: '+49 40 987654',
-      website: 'www.techstart.de',
-      address: 'Tech Park 10',
-      city: 'Hamburg',
+      name: 'Brussels Electrical Experts',
+      email: 'contact@brusselselectric.be',
+      phone: '+32 2 555 23 45',
+      website: 'www.brusselselectric.be',
+      address: 'Avenue Louise 210',
+      city: 'Brussels',
+    });
+
+    const org3 = await Organization.create({
+      name: 'Brussels Renovation & Heating',
+      email: 'hello@brusselsservice.be',
+      phone: '+32 2 555 34 56',
+      website: 'www.brusselsservice.be',
+      address: 'Boulevard Anspach 32',
+      city: 'Brussels',
+    });
+
+    const org4 = await Organization.create({
+      name: 'Brussels Painter & Decor',
+      email: 'office@brusspainter.be',
+      phone: '+32 2 555 45 67',
+      website: 'www.brusspainter.be',
+      address: 'Rue des Bouchers 12',
+      city: 'Brussels',
+    });
+
+    const org5 = await Organization.create({
+      name: 'Brussels Locksmith Solutions',
+      email: 'service@brusselslock.be',
+      phone: '+32 2 555 56 78',
+      website: 'www.brusselslock.be',
+      address: 'Rue Royale 128',
+      city: 'Brussels',
     });
 
     // Create contacts
     const contact1 = await Contact.create({
-      firstName: 'Max',
-      lastName: 'Müller',
-      email: 'max.mueller@acme.com',
-      phone: '+49 30 111111',
+      firstName: 'Luc',
+      lastName: 'Dupont',
+      email: 'luc.dupont@brusselsplumbing.be',
+      phone: '+32 472 11 22 33',
       organizationId: org1.id,
       position: 'Geschäftsführer',
       status: 'active',
-      tags: 'vip,partner',
-      notes: 'Wichtiger Geschäftspartner',
+      tags: 'plumber,local,brussels',
+      notes: 'Spezialisiert auf Notfälle und Rohrbruchreparaturen.',
     });
 
     const contact2 = await Contact.create({
-      firstName: 'Sandra',
-      lastName: 'Schmidt',
-      email: 'sandra.schmidt@acme.com',
-      phone: '+49 30 222222',
-      organizationId: org1.id,
-      position: 'Projektmanagerin',
+      firstName: 'Elise',
+      lastName: 'Vermeulen',
+      email: 'elise.vermeulen@brusselselectric.be',
+      phone: '+32 472 22 33 44',
+      organizationId: org2.id,
+      position: 'Projektleiterin',
       status: 'active',
-      tags: 'project-lead',
+      tags: 'electrician,installation',
+      notes: 'Fokus auf Gebäudeinstallation und Sicherheitsprüfungen.',
     });
 
     const contact3 = await Contact.create({
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@techstart.de',
-      phone: '+49 40 333333',
-      organizationId: org2.id,
-      position: 'CTO',
-      status: 'lead',
-      tags: 'tech',
+      firstName: 'Mauro',
+      lastName: 'De Smet',
+      email: 'mauro.desmet@brusselsservice.be',
+      phone: '+32 472 33 44 55',
+      organizationId: org3.id,
+      position: 'Servicekoordinator',
+      status: 'active',
+      tags: 'heating,renovation',
+      notes: 'Verwaltet Renovierungen, Heizung und Wartung.',
+    });
+
+    const contact4 = await Contact.create({
+      firstName: 'Sophie',
+      lastName: 'Lebrun',
+      email: 'sophie.lebrun@brusspainter.be',
+      phone: '+32 472 44 55 66',
+      organizationId: org4.id,
+      position: 'Betriebsleiterin',
+      status: 'active',
+      tags: 'painter,decor',
+      notes: 'Bietet Innen- und Außenanstriche für Wohn- und Geschäftsgebäude.',
+    });
+
+    const contact5 = await Contact.create({
+      firstName: 'Thomas',
+      lastName: 'Martens',
+      email: 'thomas.martens@brusselslock.be',
+      phone: '+32 472 55 66 77',
+      organizationId: org5.id,
+      position: 'Schlüsseltechniker',
+      status: 'active',
+      tags: 'locksmith,emergency',
+      notes: '24/7 Notfalldienst für Türöffnungen und Sicherheitslösungen.',
     });
 
     // Create tickets
     await ServiceTicket.create({
-      title: 'Website überarbeiten',
-      description: 'Homepage soll neues Design bekommen',
+      title: 'Leck in Badezimmerleitung reparieren',
+      description: 'Dringend: Rohrbruch im Badezimmer, Wasser tropft.',
       contactId: contact1.id,
-      status: 'in_progress',
-      priority: 'high',
-      dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      assignedTo: 'Team A',
+      status: 'open',
+      priority: 'urgent',
+      dueDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+      assignedTo: 'Plumbing Team Brussels',
     });
 
     await ServiceTicket.create({
-      title: 'API-Integration',
-      description: 'Rest API in Kundenportal integrieren',
+      title: 'Küche neu verkabeln',
+      description: 'Elektriker benötigt für neue Herdanschlüsse und Steckdosen.',
+      contactId: contact2.id,
+      status: 'in_progress',
+      priority: 'high',
+      dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+      assignedTo: 'Electrical Team Brussels',
+    });
+
+    await ServiceTicket.create({
+      title: 'Heizungswartung und Thermostattausch',
+      description: 'Regelmäßige Wartung für Zentralheizung und neues Thermostat.',
       contactId: contact3.id,
       status: 'open',
-      priority: 'urgent',
-      dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-      assignedTo: 'Team B',
+      priority: 'medium',
+      dueDate: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+      assignedTo: 'Renovation & Heating Team',
+    });
+
+    await ServiceTicket.create({
+      title: 'Treppenhaus neu streichen',
+      description: 'Neuer Anstrich für das Treppenhaus im Gebäude an der Rue Royale.',
+      contactId: contact4.id,
+      status: 'open',
+      priority: 'medium',
+      dueDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
+      assignedTo: 'Painter & Decor Team',
+    });
+
+    await ServiceTicket.create({
+      title: 'Notöffnung Wohnungstür',
+      description: 'Schlüssel wurde verloren, Tür muss heute geöffnet werden.',
+      contactId: contact5.id,
+      status: 'open',
+      priority: 'high',
+      dueDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
+      assignedTo: 'Locksmith Response Team',
     });
 
     // Create appointments
