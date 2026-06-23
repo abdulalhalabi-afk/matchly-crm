@@ -38,6 +38,22 @@ const seedDatabase = async () => {
             address: 'Boulevard Anspach 32',
             city: 'Brussels',
         });
+        const org4 = await models_1.Organization.create({
+            name: 'Brussels Painter & Decor',
+            email: 'office@brusspainter.be',
+            phone: '+32 2 555 45 67',
+            website: 'www.brusspainter.be',
+            address: 'Rue des Bouchers 12',
+            city: 'Brussels',
+        });
+        const org5 = await models_1.Organization.create({
+            name: 'Brussels Locksmith Solutions',
+            email: 'service@brusselslock.be',
+            phone: '+32 2 555 56 78',
+            website: 'www.brusselslock.be',
+            address: 'Rue Royale 128',
+            city: 'Brussels',
+        });
         // Create contacts
         const contact1 = await models_1.Contact.create({
             firstName: 'Luc',
@@ -48,7 +64,7 @@ const seedDatabase = async () => {
             position: 'Geschäftsführer',
             status: 'active',
             tags: 'plumber,local,brussels',
-            notes: 'Spezialisiert auf Notfälle und Rohrbruchreparaturen',
+            notes: 'Spezialisiert auf Notfälle und Rohrbruchreparaturen.',
         });
         const contact2 = await models_1.Contact.create({
             firstName: 'Elise',
@@ -59,7 +75,7 @@ const seedDatabase = async () => {
             position: 'Projektleiterin',
             status: 'active',
             tags: 'electrician,installation',
-            notes: 'Fokus auf Gebäudeinstallation und Sicherheitsprüfungen',
+            notes: 'Fokus auf Gebäudeinstallation und Sicherheitsprüfungen.',
         });
         const contact3 = await models_1.Contact.create({
             firstName: 'Mauro',
@@ -70,7 +86,29 @@ const seedDatabase = async () => {
             position: 'Servicekoordinator',
             status: 'active',
             tags: 'heating,renovation',
-            notes: 'Verwaltet Renovierungen, Heizung und Wartung',
+            notes: 'Verwaltet Renovierungen, Heizung und Wartung.',
+        });
+        const contact4 = await models_1.Contact.create({
+            firstName: 'Sophie',
+            lastName: 'Lebrun',
+            email: 'sophie.lebrun@brusspainter.be',
+            phone: '+32 472 44 55 66',
+            organizationId: org4.id,
+            position: 'Betriebsleiterin',
+            status: 'active',
+            tags: 'painter,decor',
+            notes: 'Bietet Innen- und Außenanstriche für Wohn- und Geschäftsgebäude.',
+        });
+        const contact5 = await models_1.Contact.create({
+            firstName: 'Thomas',
+            lastName: 'Martens',
+            email: 'thomas.martens@brusselslock.be',
+            phone: '+32 472 55 66 77',
+            organizationId: org5.id,
+            position: 'Schlüsseltechniker',
+            status: 'active',
+            tags: 'locksmith,emergency',
+            notes: '24/7 Notfalldienst für Türöffnungen und Sicherheitslösungen.',
         });
         // Create tickets
         await models_1.ServiceTicket.create({
@@ -99,6 +137,24 @@ const seedDatabase = async () => {
             priority: 'medium',
             dueDate: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
             assignedTo: 'Renovation & Heating Team',
+        });
+        await models_1.ServiceTicket.create({
+            title: 'Treppenhaus neu streichen',
+            description: 'Neuer Anstrich für das Treppenhaus im Gebäude an der Rue Royale.',
+            contactId: contact4.id,
+            status: 'open',
+            priority: 'medium',
+            dueDate: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
+            assignedTo: 'Painter & Decor Team',
+        });
+        await models_1.ServiceTicket.create({
+            title: 'Notöffnung Wohnungstür',
+            description: 'Schlüssel wurde verloren, Tür muss heute geöffnet werden.',
+            contactId: contact5.id,
+            status: 'open',
+            priority: 'high',
+            dueDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
+            assignedTo: 'Locksmith Response Team',
         });
         // Create appointments
         const tomorrow = new Date();
